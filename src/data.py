@@ -16,27 +16,23 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
     """Apply standard cleaning steps to the raw Online Retail DataFrame.
 
     Steps:
-    1. Drop rows with missing CustomerID
-    2. Remove cancelled invoices (InvoiceNo starting with 'C')
-    3. Remove rows where Quantity <= 0 or UnitPrice <= 0
-    4. Strip whitespace from Description
-    5. Add derived column TotalPrice = Quantity * UnitPrice
+    1. Remove cancelled invoices (InvoiceNo starting with 'C')
+    2. Remove rows where Quantity <= 0 or UnitPrice <= 0
+    3. Strip whitespace from Description
+    4. Add derived column TotalPrice = Quantity * UnitPrice
     """
     df = df.copy()
 
-    # 1. Drop missing CustomerID
-    df = df.dropna(subset=["CustomerID"])
-
-    # 2. Remove cancellations
+    # 1. Remove cancellations
     df = df[~df["InvoiceNo"].astype(str).str.startswith("C")]
 
-    # 3. Remove non-positive quantities and prices
+    # 2. Remove non-positive quantities and prices
     df = df[(df["Quantity"] > 0) & (df["UnitPrice"] > 0)]
 
-    # 4. Strip whitespace from Description
+    # 3. Strip whitespace from Description
     df["Description"] = df["Description"].astype(str).str.strip()
 
-    # 5. Add TotalPrice
+    # 4. Add TotalPrice
     df["TotalPrice"] = df["Quantity"] * df["UnitPrice"]
 
     return df.reset_index(drop=True)
