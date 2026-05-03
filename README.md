@@ -28,3 +28,7 @@ Running in Visual Studio Code (recommended):
 2. 02_market_basket.ipynb: Association rule mining with Apriori
 3. 03_customer_segmentation.ipynb: K-means clustering on RFM features
 4. 04_time_series_clustering.ipynb: STL decomposition + DTW K-means clustering
+
+Various figures from the notebooks in reports/ 
+
+Proposal and final report document in docs/
